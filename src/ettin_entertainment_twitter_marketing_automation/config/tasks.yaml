@@ -1,0 +1,67 @@
+---
+monitor_ttrpg_community_trends:
+  description: 'Research and monitor Twitter/X and web platforms for trending TTRPG
+    conversations, particularly focusing on {product_focus} and the broader {target_community}
+    community. Search for relevant hashtags like #TTRPG, #DnD, #Daggerheart, #TableTopRPG,
+    and gaming community discussions. Identify engagement opportunities, trending
+    topics, popular posts about similar games, and influential community members who
+    are actively discussing tabletop games. Look for questions, pain points, or interests
+    that our content could address.'
+  expected_output: 'A detailed report containing: 1) Current trending TTRPG topics
+    and hashtags, 2) Popular conversations and engagement opportunities, 3) Influential
+    community members and their content themes, 4) Questions or pain points from the
+    community that our content could address, 5) Competitor activity and popular content
+    formats, 6) Specific conversation threads or posts where engagement would be appropriate
+    and valuable.'
+  agent: twitter_scout
+draft_engaging_twitter_content:
+  description: 'Based on the community insights and trending topics, create 3-5 different
+    types of Twitter/X content for {company_name} that promote {product_focus} products
+    in a helpful, non-salesy way. Include: 1) Helpful tips or game advice that naturally
+    showcases our products, 2) Responses to community questions that provide value
+    while mentioning our solutions, 3) Original content that starts valuable discussions,
+    4) Community engagement posts that build relationships. Focus on providing genuine
+    value first, with subtle product integration. Each piece should feel authentic
+    and helpful to the TTRPG community.'
+  expected_output: 'A collection of 3-5 Twitter/X content pieces in various formats
+    (tweets, reply suggestions, thread starters) that are helpful, engaging, and authentically
+    promote our Daggerheart products. Each piece should include: the main content,
+    the intended purpose/goal, the target conversation or trend it addresses, and
+    notes on why it provides value to the community.'
+  agent: brand_voice_writer
+  context:
+  - monitor_ttrpg_community_trends
+validate_daggerheart_accuracy:
+  description: Thoroughly review all drafted content to verify 100% accuracy of {product_focus}
+    game mechanics, terminology, rules references, and any technical information.
+    Check that all game-specific language, mechanics descriptions, character abilities,
+    and system references are completely accurate and align with official game materials.
+    Ensure no misinformation is included that could confuse players or damage our
+    credibility. Cross-reference any rules mentions with official sources and flag
+    any content that needs correction or clarification.
+  expected_output: 'A detailed review report for each content piece indicating: 1)
+    Accuracy verification status (approved/needs revision), 2) Any factual corrections
+    needed with specific recommendations, 3) Terminology or rules references that
+    were verified as correct, 4) Alternative phrasings for any problematic sections,
+    5) Final approval status for each piece with confidence level in the accuracy
+    of all technical information.'
+  agent: daggerheart_rules_expert
+  context:
+  - draft_engaging_twitter_content
+optimize_and_schedule_posts:
+  description: Take the approved, accurate content and optimize it for Twitter/X publication.
+    Format each piece perfectly for the platform, add strategic hashtags for maximum
+    discoverability in the {target_community} community, suggest optimal posting times
+    for TTRPG audience engagement, and provide specific recommendations for encouraging
+    community interaction. Include character count optimization, engagement tactics
+    (questions, polls, calls-to-action), and a posting schedule that maximizes reach
+    across different time zones where our audience is active.
+  expected_output: 'A complete social media publishing package containing: 1) Finalized,
+    platform-optimized content ready for posting, 2) Strategic hashtag recommendations
+    for each post, 3) Optimal posting schedule with specific times and dates, 4) Engagement
+    tactics and interaction strategies for each piece, 5) Character count verification
+    and formatting notes, 6) Follow-up suggestions for maintaining community conversations,
+    7) Performance tracking recommendations for measuring success.'
+  agent: social_media_publisher
+  context:
+  - validate_daggerheart_accuracy
