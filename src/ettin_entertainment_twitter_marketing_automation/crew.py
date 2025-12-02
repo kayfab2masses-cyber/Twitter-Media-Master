@@ -4,12 +4,11 @@ from crewai import LLM
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import (
-	SerperDevTool
+	SerperDevTool,
+    FileReadTool
 )
 
-
-
-
+# We no longer import PostToTwitterTool because we are not auto-posting.
 
 @CrewBase
 class EttinEntertainmentTwitterMarketingAutomationCrew:
@@ -46,7 +45,7 @@ class EttinEntertainmentTwitterMarketingAutomationCrew:
             config=self.agents_config["brand_voice_writer"],
             
             
-            tools=[],
+            tools=[FileReadTool()],
             reasoning=False,
             max_reasoning_attempts=None,
             inject_date=True,
@@ -85,28 +84,7 @@ class EttinEntertainmentTwitterMarketingAutomationCrew:
             
         )
     
-    @agent
-    def social_media_publisher(self) -> Agent:
-        
-        return Agent(
-            config=self.agents_config["social_media_publisher"],
-            
-            
-            tools=[],
-            reasoning=False,
-            max_reasoning_attempts=None,
-            inject_date=True,
-            allow_delegation=False,
-            max_iter=25,
-            max_rpm=None,
-            
-            max_execution_time=None,
-            llm=LLM(
-                model="gpt-4o-mini",
-                temperature=0.7,
-            ),
-            
-        )
+    # We have removed the social_media_publisher agent
     
 
     
@@ -128,23 +106,17 @@ class EttinEntertainmentTwitterMarketingAutomationCrew:
             
         )
     
+    # This is the new, final task from our tasks.yaml
     @task
-    def validate_daggerheart_accuracy(self) -> Task:
+    def validate_and_finalize_content(self) -> Task:
         return Task(
-            config=self.tasks_config["validate_daggerheart_accuracy"],
+            config=self.tasks_config["validate_and_finalize_content"],
             markdown=False,
             
             
         )
     
-    @task
-    def optimize_and_schedule_posts(self) -> Task:
-        return Task(
-            config=self.tasks_config["optimize_and_schedule_posts"],
-            markdown=False,
-            
-            
-        )
+    # We have removed the publishing task
     
 
     @crew
